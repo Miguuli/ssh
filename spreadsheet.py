@@ -13,12 +13,18 @@ class SpreadSheet:
 
     def evaluate(self, cell: str) -> int | str:
         value = self.get(cell)
-        if value.startswith("='") and value.endswith("'"):
+        if value.startswith("='") and not value.endswith("'"):
+            return "#Error"
+        elif value.startswith("='") and value.endswith("'"):
             return value[2:-1]
-        if value.startswith("'") and value.endswith("'"):
+        elif value.startswith("'") and value.endswith("'"):
             return value[1:-1]
-        if value.startswith("="):
+        elif value.startswith("=") and value.endswith("'"):
             return value[1:]
+        elif value.startswith("=") and value.endswith(""):
+            return value[1:]
+
+
         try:
             return int(value)
         except ValueError:
