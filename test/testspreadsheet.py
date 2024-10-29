@@ -24,3 +24,7 @@ class TestSpreadSheet(TestCase):
         spreadsheet.set("A1", "'Apple")
         self.assertEqual("#Error", spreadsheet.evaluate("A1"))
 
+    def test_evaluate_equal_sign_format_string(self):
+        spreadsheet = SpreadSheet()
+        spreadsheet.set("A1", "='Apple'")
+        self.assertEqual("Apple", spreadsheet.evaluate("A1"))
