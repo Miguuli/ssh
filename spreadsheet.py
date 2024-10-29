@@ -13,7 +13,8 @@ class SpreadSheet:
 
     def evaluate(self, cell: str) -> int | str:
         value = self.get(cell)
-        if value.isdigit():
+        try:
             return int(value)
-        return value
+        except ValueError:
+            return "#Error"
 
